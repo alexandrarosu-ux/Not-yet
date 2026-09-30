@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOT YET — Between what you feel and what you do next</title>
+<style>
+:root{--bg:#f6efe6;--ink:#172327;--card:#fffaf4;--accent:#e9b29f;--soft:#e6eee4;--line:#d9d0c5}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,sans-serif}
+.wrap{max-width:760px;margin:auto;padding:24px 22px 60px}.top{display:flex;justify-content:space-between;align-items:center}.brand{font:24px Georgia,serif}
+.lang{display:flex;gap:6px}.lang button{border:1px solid var(--line);background:#fffaf5;border-radius:999px;padding:8px 11px;cursor:pointer}.lang button.on{background:#172a2f;color:white}
+.hero{padding:72px 0 48px}.eyebrow{font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+h1,h2{font-family:Georgia,serif;font-weight:500}h1{font-size:clamp(42px,8vw,72px);line-height:1.02;margin:14px 0 20px}h2{font-size:32px}
+p{font-size:18px;line-height:1.55}.muted{opacity:.7}.cta{display:inline-block;background:#172a2f;color:white;text-decoration:none;padding:15px 20px;border-radius:13px;margin-top:12px}
+.card{background:#fffaf5;border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}.peach{background:#fae4da}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.steps{font-weight:bold;letter-spacing:.08em}.small{font-size:13px}.buy{width:100%;border:0;background:#172a2f;color:white;border-radius:13px;padding:15px;font-size:16px;cursor:pointer}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.hero{padding-top:48px}}
+</style></head>
+<body><main class="wrap">
+<div class="top"><div class="brand">Not Yet.</div><div class="lang"><button id="enBtn" onclick="setLang('en')">EN</button><button id="roBtn" onclick="setLang('ro')">RO</button></div></div>
+<section class="hero">
+<div class="eyebrow" data-en="A 3-minute pause before the next move" data-ro="O pauză de 3 minute înainte de următorul pas"></div>
+<h1 data-en="You did the hard thing.<br>Now you're wondering if you did the wrong thing." data-ro="Ai făcut lucrul greu.<br>Acum te întrebi dacă ai făcut lucrul greșit."></h1>
+<p data-en="Before you apologize, explain, text again or take it all back — create a little space between what you feel and what you do next." data-ro="Înainte să-ți ceri scuze, să explici, să mai trimiți un mesaj sau să retragi tot ce ai spus — creează puțin spațiu între ceea ce simți și ceea ce faci mai departe."></p>
+<a class="cta" href="prototype.html" data-en="Try the 3-minute prototype →" data-ro="Încearcă prototipul de 3 minute →"></a>
+</section>
+<div class="card peach"><h2 data-en="Feeling guilty doesn't necessarily mean you're guilty." data-ro="Faptul că te simți vinovat(ă) nu înseamnă neapărat că ești vinovat(ă)."></h2>
+<p data-en="But it doesn't automatically mean you were right either. NOT YET helps you look at what actually happened before you react to the discomfort." data-ro="Dar nici nu înseamnă automat că ai avut dreptate. NOT YET te ajută să te uiți la ce s-a întâmplat de fapt înainte să reacționezi la disconfort."></p></div>
+<section><h2 data-en="For that moment after…" data-ro="Pentru momentul acela de după…"></h2><div class="grid">
+<div class="card" data-en="You said no or set a boundary." data-ro="Ai spus nu sau ai pus o limită."></div>
+<div class="card" data-en="You had a difficult conversation." data-ro="Ai avut o conversație dificilă."></div>
+<div class="card" data-en="You stood up for yourself." data-ro="Te-ai apărat sau ți-ai susținut punctul de vedere."></div>
+<div class="card" data-en="You want to send one more message just to make the feeling go away." data-ro="Vrei să mai trimiți un mesaj doar ca să dispară senzația asta."></div>
+</div></section>
+<section class="card"><div class="steps">FACT → STORY → RESPONSIBILITY → URGE → PAUSE → DECIDE</div>
+<p data-en="Not an automatic “you're right.” Not an automatic “they're wrong.” A short reflection to help you decide for yourself." data-ro="Nu un „tu ai dreptate” automat. Nu un „ei greșesc” automat. O reflecție scurtă care te ajută să decizi singur(ă)."></p></section>
+<section class="card"><h2 data-en="Would you actually use this?" data-ro="Ai folosi asta în realitate?"></h2>
+<p data-en="This is an early prototype. If it became a finished product, would it be worth $9.99 to you?" data-ro="Acesta este un prototip timpuriu. Dacă ar deveni un produs final, ar valora 9,99 $ pentru tine?"></p>
+<button class="buy" onclick="buyIntent()" data-en="I'd buy this for $9.99" data-ro="Aș cumpăra asta cu 9,99 $"></button>
+<p id="thanks" class="muted" style="display:none" data-en="Thank you. This button records no data and takes no payment — we're only testing the idea." data-ro="Mulțumesc. Butonul nu înregistrează date și nu face nicio plată — testăm doar ideea."></p></section>
+<p class="small muted" data-en="NOT YET is a reflection and decision-support tool. It is not therapy, diagnosis, crisis support or medical care." data-ro="NOT YET este un instrument de reflecție și sprijin în luarea unei decizii. Nu este terapie, diagnostic, serviciu de criză sau îngrijire medicală."></p>
+</main>
+<script>
+let lang=localStorage.getItem('nyLang')||((navigator.language||'').toLowerCase().startsWith('ro')?'ro':'en');
+function setLang(l){lang=l;localStorage.setItem('nyLang',l);document.documentElement.lang=l;document.querySelectorAll('[data-en]').forEach(el=>{el.innerHTML=el.dataset[l]});enBtn.classList.toggle('on',l==='en');roBtn.classList.toggle('on',l==='ro')}
+function buyIntent(){document.getElementById('thanks').style.display='block'}
+setLang(lang);
+</script></body></html>
